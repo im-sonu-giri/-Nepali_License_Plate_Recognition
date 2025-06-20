@@ -1,26 +1,24 @@
-import React from 'react';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
+import About from './pages/About'
+import NotFound from './pages/NotFound'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
-function App() {
+export default function App() {
   return (
-    <div className="app-container">
-      <header className="header">
-        <a href="/" className="logo">
-          <div className="logo-icon"></div>
-          <span className="logo-text">NLPR System</span>
-        </a>
-        <nav className="nav-links">
-          <a href="/" className="nav-link">Home</a>
-          <a href="/about" className="nav-link">About</a>
-        </nav>
-      </header>
-
-      <main>
-        <h1>Nepali License Plate Recognition</h1>
-        <p className="devanagari">नेपाली लाइसेन्स प्लेट</p>
-      </main>
-    </div>
-  );
+    <Router>
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
+  )
 }
-
-export default App;

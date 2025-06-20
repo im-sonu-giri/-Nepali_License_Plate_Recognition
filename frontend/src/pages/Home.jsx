@@ -1,66 +1,79 @@
-import { useState } from 'react';
-import FileUpload from '../components/FileUpload';
-import Results from '../components/Results';
-import Header from '../components/Header';
-import { processImage } from '../services/api';
+import { useState } from 'react'
+import FileUpload from '../components/common/FileUpload'
+import ResultDisplay from '../components/ResultDisplay'
+import LoadingSpinner from '../components/common/LoadingSpinner'
+import yoloModelImage from '../assets/images/yolo-v8-model.png'
 
-const Home = () => {
-  const [results, setResults] = useState(null);
-  const [error, setError] = useState(null);
+export default function Home() {
+  const [image, setImage] = useState(null)
+  const [result, setResult] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
 
-  const handleUpload = async (imageData) => {
+  const handleUpload = async (file) => {
+    setLoading(true)
+    setError(null)
     try {
-      setError(null);
-      const response = await processImage(imageData);
-      setResults({
-        originalImage: imageData,
-        recognizedText: response.text,
-        confidence: response.confidence
-      });
+      // Here you would typically call your API endpoint
+      // const response = await axios.post('/api/recognize', formData)
+      // Simulating API call with timeout
+      setTimeout(() => {
+        setResult({
+          plateNumber: 'बा १२ प १२३४',
+          confidence: '98.7%',
+          image: URL.createObjectURL(file)
+        })
+        setLoading(false)
+      }, 2000)
     } catch (err) {
-      setError('Failed to process image. Please try again with a clearer image.');
-      console.error(err);
+      setError('Failed to process image. Please try again.')
+      setLoading(false)
     }
-  };
+  }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
-      <Header />
-      
-      <main className="container mx-auto px-4 py-8">
-        <div className="max-w-3xl mx-auto space-y-8">
-          <div className="text-center">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-              Nepali License Plate Recognition
-            </h1>
-            <p className="text-gray-600 dark:text-gray-300">
-              Upload an image to detect and recognize Nepali license plates
-            </p>
+    <div className="container mx-auto px-4 py-8">
+      <div className="text-center mb-10">
+        <h1 className="text-3xl font-bold text-gray-800 mb-4">
+          Nepali License Plate Recognition
+        </h1>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          Upload an image of a Nepali license plate to recognize the characters using our
+          trained YOLOv8 model.
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-8 items-center">
+        <div>
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold mb-4">Try It Out</h2>
+            <FileUpload onUpload={handleUpload} disabled={loading} />
+            {error && <p className="text-red-500 mt-2">{error}</p>}
           </div>
 
-          {error && (
-            <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded">
-              <p>{error}</p>
+          {loading && (
+            <div className="mt-6 flex justify-center">
+              <LoadingSpinner />
+              <span className="ml-2">Processing image...</span>
             </div>
           )}
 
-          <FileUpload onUpload={handleUpload} />
-
-          {results && <Results {...results} />}
-
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
-            <h3 className="font-semibold text-lg mb-2">How it works</h3>
-            <ol className="list-decimal list-inside space-y-2 text-gray-700 dark:text-gray-300">
-              <li>Upload a clear image of a vehicle with visible license plate</li>
-              <li>Our system will detect the license plate region</li>
-              <li>OCR engine will recognize the Devanagari characters</li>
-              <li>View the results with confidence score</li>
-            </ol>
-          </div>
+          {result && <ResultDisplay result={result} />}
         </div>
-      </main>
-    </div>
-  );
-};
 
-export default Home;
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h2 className="text-xl font-semibold mb-4">Our YOLOv8 Model</h2>
+          <img
+            src={yoloModelImage}
+            alt="YOLOv8 model architecture"
+            className="w-full h-auto rounded"
+          />
+          <p className="mt-4 text-gray-700">
+            Our custom-trained YOLOv8 model specializes in recognizing Nepali license plate
+            characters with high accuracy.
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}

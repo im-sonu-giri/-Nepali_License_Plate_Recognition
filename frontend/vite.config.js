@@ -3,9 +3,12 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
+  optimizeDeps: {
+    include: ['tailwindcss'],
+  },
   css: {
     postcss: {
-      config: false // Disable automatic PostCSS config loading
+      config: false
     }
   }
 })

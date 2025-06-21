@@ -1,22 +1,18 @@
+/* Reset and base styles */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
+:root {
   font-family: 'Inter', 'Noto Sans Devanagari', sans-serif;
 }
 
-/* Nepali font support */
-.devanagari {
-  font-family: 'Noto Sans Devanagari', sans-serif;
+/* Force full height layout */
+html, body, #root {
+  height: 100%;
 }
 
-/* Custom animations */
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-.animate-spin {
-  animation: spin 1s linear infinite;
+/* Debugging border - remove after confirmation */
+.debug {
+  border: 1px solid red;
 }

@@ -1,37 +1,35 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Home from './pages/Home'
-import About from './pages/About'
-import NotFound from './pages/NotFound'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import { Toaster } from 'react-hot-toast' // For notifications
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 
-export default function App() {
+function App() {
+  const [count, setCount] = useState(0)
+
   return (
-    <Router>
-      <div className="min-h-screen flex flex-col bg-background text-text-primary">
-        <Header />
-        <main className="flex-grow py-8">
-          <div className="container mx-auto px-4">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </div>
-        </main>
-        <Footer />
-        <Toaster 
-          position="bottom-right"
-          toastOptions={{
-            style: {
-              background: 'var(--surface)',
-              color: 'var(--text-primary)',
-              border: '1px solid var(--primary)'
-            }
-          }}
-        />
+    <>
+      <div>
+        <a href="https://vite.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
       </div>
-    </Router>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </>
   )
 }
+
+export default App

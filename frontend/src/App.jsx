@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Header from './components/header.jsx'
-import ImageUpload from './components/ImageUpload';
+import ImageUpload from './pages/ImageUpload.jsx';
 import './App.css'
 
 function App() {

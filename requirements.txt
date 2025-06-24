@@ -1,0 +1,12 @@
+ultralytics==8.0.230
+torch==2.1.0
+torchvision==0.16.0
+numpy
+opencv-python
+pillow
+matplotlib
+tqdm
+scikit-learn
+pytesseract
+
+

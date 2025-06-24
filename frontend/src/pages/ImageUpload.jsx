@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react';
 import { FiUpload } from 'react-icons/fi';
-import './ImageUpload.css'; // Use separate CSS file for styling
+import './ImageUpload.css';
 
-export default function ImageUpload({ onUpload }) {
+export default function ImageUpload({ setCurrentPage }) {
   const [preview, setPreview] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -19,8 +19,9 @@ export default function ImageUpload({ onUpload }) {
     if (!preview) return;
     setIsLoading(true);
     try {
-      const mockFile = new File([], 'sample.jpg');
-      await onUpload(mockFile);
+      // Simulate processing delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      setCurrentPage('results');
     } finally {
       setIsLoading(false);
     }

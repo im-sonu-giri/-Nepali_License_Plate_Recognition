@@ -1,13 +1,14 @@
 .upload-container {
   max-width: 600px;
-  margin: 140px auto;
+  margin: 40px auto;
   padding: 24px;
-  background-color: #11082b;
+  background-color: #11082b; /* Dark purple from image */
   border: 1px solid #444;
   border-radius: 12px;
   text-align: center;
   color: #f0f0f0;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-left: 240px; /* Account for header width */
 }
 
 .dropzone {
@@ -16,7 +17,7 @@
   border-radius: 10px;
   cursor: pointer;
   transition: border-color 0.3s;
-  background-color: #2a2a2a;
+  background-color: #1a0a3a; /* Slightly lighter than container */
 }
 
 .dropzone:hover {

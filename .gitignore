@@ -1,0 +1,12 @@
+# YOLO training artifacts
+runs/
+*.pt
+*.png
+ run_gpu/
+# Virtual environment
+.venv/
+__pycache__/
+*.pyc
+
+# PyCharm settings (optional)
+.idea/

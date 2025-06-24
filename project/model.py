@@ -5,9 +5,9 @@ from mltu.model_utils import residual_block
 
 def train_model(input_dim, output_dim, activation='leaky_relu', dropout=0.2):
     
-    inputs = layers.Input(shape=input_dim, name="input")
+    inputs = layers.Input(shape=input_dim, name="input")        
 
-    input = layers.Lambda(lambda x: x / 255)(inputs)
+    input = layers.Lambda(lambda x: x / 255)(inputs)            # normalization
 
     x1 = residual_block(input, 16, activation=activation, skip_conv=True, strides=1, dropout=dropout)
 

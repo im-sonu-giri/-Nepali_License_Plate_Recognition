@@ -29,7 +29,7 @@ export default function ImageUpload() {
 
   return (
     <div className="upload-container">
-      <h2 className="upload-title">License Plate Recognition</h2>
+      <h2 className="upload-title">Nepali License Plate Recognition</h2>
       <p className="upload-description">Upload an image of a vehicle to recognize the Nepali license plate</p>
       
       <div 

@@ -5,17 +5,19 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   max-width: 900px;
   margin: 0 auto;
+  height: 90%;
 }
 
 .upload-title {
-  font-size: 1.5rem;
+  font-size: 2.8rem;
   color: #11082b;
   margin-bottom: 0.5rem;
 }
 
 .upload-description {
+  font-size: 1.25rem;
   color: #4a5568;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .dropzone {
@@ -25,20 +27,21 @@
   text-align: center;
   cursor: pointer;
   transition: all 0.3s;
+  height: 30%;
 }
 
 .dropzone:hover {
-  border-color: #646cff;
+  border-color: #323568;
 }
 
 .dropzone-active {
-  border-color: #646cff;
+  border-color: #1b2198;
   background-color: #f0f4ff;
 }
 
 .upload-icon {
   font-size: 2.5rem;
-  color: #646cff;
+  color: hsl(238, 91%, 60%);
   margin-bottom: 1rem;
 }
 

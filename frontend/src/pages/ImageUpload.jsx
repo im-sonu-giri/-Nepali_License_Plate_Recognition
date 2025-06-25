@@ -1,13 +1,13 @@
 import { useCallback, useState } from 'react';
-import { FiUpload } from 'react-icons/fi';
-import './ImageUpload.css';
+import { FiUpload, FiImage } from 'react-icons/fi';
+import '../App.css'; // Using main CSS file
 
-export default function ImageUpload({ setCurrentPage }) {
+export default function FileUpload({ onUpload }) {
   const [preview, setPreview] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const onDrop = useCallback((files) => {
-    const file = files[0];
+  const onDrop = useCallback((acceptedFiles) => {
+    const file = acceptedFiles[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => setPreview(reader.result);
@@ -19,9 +19,9 @@ export default function ImageUpload({ setCurrentPage }) {
     if (!preview) return;
     setIsLoading(true);
     try {
-      // Simulate processing delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setCurrentPage('results');
+      // In a real app, you would upload to your backend here
+      const mockFile = new File([], 'sample.jpg');
+      await onUpload(mockFile);
     } finally {
       setIsLoading(false);
     }
@@ -41,16 +41,19 @@ export default function ImageUpload({ setCurrentPage }) {
           style={{ display: 'none' }}
         />
         {preview ? (
-          <img src={preview} alt="Uploaded Preview" className="result-image" />
+          <img 
+            src={preview} 
+            alt="Preview" 
+            className="result-image"
+          />
         ) : (
           <>
-            <FiUpload className="upload-icon" size={48} />
+            <FiUpload className="upload-icon" />
             <p className="upload-text">Drag & drop an image, or click to select</p>
-            <p className="upload-subtext">Supports: JPEG, PNG</p>
+            <p className="text-sm text-gray-500">Supports: JPEG, PNG</p>
           </>
         )}
       </div>
-
       {preview && (
         <button
           onClick={handleProcess}

@@ -1,75 +1,53 @@
 .upload-container {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 24px;
-  background-color: #11082b; /* Dark purple from image */
-  border: 1px solid #444;
-  border-radius: 12px;
-  text-align: center;
-  color: #f0f0f0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  margin-left: 240px; /* Account for header width */
+  background: white;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
 }
 
 .dropzone {
-  padding: 40px 20px;
-  border: 2px dashed #666;
-  border-radius: 10px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  text-align: center;
   cursor: pointer;
-  transition: border-color 0.3s;
-  background-color: #1a0a3a; /* Slightly lighter than container */
+  transition: all 0.3s;
 }
 
 .dropzone:hover {
-  border-color: #888;
+  border-color: var(--primary);
 }
 
 .dropzone-active {
-  border-color: #646cff;
+  border-color: var(--primary);
+  background-color: #eff6ff;
 }
 
 .upload-icon {
-  color: #646cff;
-  margin-bottom: 12px;
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
 }
 
 .upload-text {
-  font-size: 1rem;
-  margin-bottom: 6px;
-  color: #ccc;
-}
-
-.upload-subtext {
-  font-size: 0.85rem;
-  color: #999;
-}
-
-.result-image {
-  max-width: 100%;
-  max-height: 300px;
-  margin-top: 20px;
-  border-radius: 8px;
-  border: 1px solid #333;
+  color: #64748b;
+  margin-bottom: 0.5rem;
 }
 
 .upload-btn {
-  margin-top: 20px;
-  padding: 12px 24px;
-  background-color: #646cff;
+  background-color: var(--primary);
   color: white;
   border: none;
-  font-weight: 600;
-  font-size: 1rem;
-  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.25s;
+  transition: background-color 0.2s;
+  width: 100%;
+  margin-top: 1rem;
 }
 
 .upload-btn:hover {
-  background-color: #535bf2;
-}
-
-.upload-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+  background-color: var(--primary-dark);
 }

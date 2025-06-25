@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react';
 import { FiUpload, FiImage } from 'react-icons/fi';
-import '../App.css'; // Using main CSS file
+import './ImageUpload.css';
 
-export default function FileUpload({ onUpload }) {
+export default function ImageUpload() {
   const [preview, setPreview] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -20,8 +20,8 @@ export default function FileUpload({ onUpload }) {
     setIsLoading(true);
     try {
       // In a real app, you would upload to your backend here
-      const mockFile = new File([], 'sample.jpg');
-      await onUpload(mockFile);
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      alert('Processing complete! (This is a demo)');
     } finally {
       setIsLoading(false);
     }
@@ -29,6 +29,9 @@ export default function FileUpload({ onUpload }) {
 
   return (
     <div className="upload-container">
+      <h2 className="upload-title">License Plate Recognition</h2>
+      <p className="upload-description">Upload an image of a vehicle to recognize the Nepali license plate</p>
+      
       <div 
         className={`dropzone ${preview ? 'dropzone-active' : ''}`}
         onClick={() => document.getElementById('file-input').click()}
@@ -50,7 +53,7 @@ export default function FileUpload({ onUpload }) {
           <>
             <FiUpload className="upload-icon" />
             <p className="upload-text">Drag & drop an image, or click to select</p>
-            <p className="text-sm text-gray-500">Supports: JPEG, PNG</p>
+            <p className="upload-hint">Supports: JPEG, PNG</p>
           </>
         )}
       </div>

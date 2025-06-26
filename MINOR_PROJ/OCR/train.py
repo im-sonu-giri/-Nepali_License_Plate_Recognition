@@ -1,3 +1,6 @@
+from model import train_model
+
+
 import os
 from tqdm import tqdm
 import tensorflow as tf
@@ -8,3 +11,11 @@ except:
     pass
 
 from keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau, TensorBoard
+
+from mltu.preprocessor import ImageReader
+
+dataset_path = "Datasets/images"
+validation_annotation_path = data_path + "/annotation_val.txt"
+train_annotation_path = data_path + "/annotation_train.txt"
+
+

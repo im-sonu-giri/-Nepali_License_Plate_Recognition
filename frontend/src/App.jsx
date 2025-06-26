@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="app">
       <Header />
-      <main style={{ marginLeft: '330px', padding: '18px', width: '110%' }}>
+      <main style={{ marginLeft: '310px', padding: '18px', width: '110%' }}>
         <Routes>
           <Route path="/" element={<ImageUpload />} />
           <Route path="/result" element={<ResultPage />} />

@@ -1,10 +1,12 @@
 import { useCallback, useState } from 'react';
 import { FiUpload, FiImage } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 import './ImageUpload.css';
 
 export default function ImageUpload() {
   const [preview, setPreview] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const onDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
@@ -21,11 +23,19 @@ export default function ImageUpload() {
     try {
       // In a real app, you would upload to your backend here
       await new Promise(resolve => setTimeout(resolve, 1500));
-      alert('Processing complete! (This is a demo)');
+      
+      // Navigate to result page with the image
+      navigate('/result', { 
+        state: { 
+          previewImage: preview,
+          imageName: 'uploaded-image.jpg' // In real app, use actual filename
+        } 
+      });
     } finally {
       setIsLoading(false);
     }
   };
+
 
   return (
     <div className="upload-container">

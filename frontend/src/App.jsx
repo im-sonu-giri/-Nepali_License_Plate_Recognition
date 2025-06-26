@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="app">
       <Header />
-      <main style={{ marginLeft: '240px', padding: '20px', width: '100%' }}>
+      <main style={{ marginLeft: '330px', padding: '18px', width: '110%' }}>
         <ImageUpload />
       </main>
     </div>

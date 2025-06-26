@@ -1,9 +1,9 @@
 .upload-container {
   background: white;
   border-radius: 0.5rem;
-  padding: 2rem;
+  padding: 2.2rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
   height: 90%;
 }

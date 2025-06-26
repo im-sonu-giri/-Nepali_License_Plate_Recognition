@@ -16,20 +16,20 @@
     font-weight: bold;
     margin-bottom: 19px;
     color: #ffffff;
-    margin-top: 18px;
+    margin-top: 15px;
 }
 
 .img{
-    margin-bottom: 15px;
+    margin-bottom: 19px;
     border-radius: 9px;
 }
 
 .divider {
   border: none;
   height: 0.1px;
-  background-color: #ccc;
-  margin: 15px 0;
-  margin-bottom: 45px;
+  background-color: #53545a;
+  margin: 1px 0; 
+  margin-bottom: 2px;
 }
 
 .project-intro {
@@ -44,14 +44,14 @@
 .subtitle {
     font-size: 17.9px;
     color: #cccccc;
-    margin-bottom: 16px;
+    margin-bottom: 26px;
 }
 
 .nav-links {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    margin-bottom: auto;
+    gap: 10px;
+    margin-bottom: 38px;
 }
 
 .nav-link {
@@ -75,16 +75,16 @@
 }
 
 .footer {
-    margin-top: 79px;
-    padding-top: 20px;
+
+    padding-top: 10px;
     border-top: 1px solid #333;
-    font-size: 12px;
+    font-size: 16px;
     color: #999;
     align-items: center;
 }
 
 .copyright {
-    margin-bottom: 5px;
+    margin-top: 0px;
 }
 
 .institution {

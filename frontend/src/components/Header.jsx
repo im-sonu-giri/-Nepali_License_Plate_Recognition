@@ -8,7 +8,13 @@ export default function Header() {
             <div className="logo">Nepali License Plate Recognition</div>
             <div className="subtitle">सवारी साधन नम्बर प्लेट पहिचान प्रणाली</div>
             <hr className="divider" />
-            <img src={img} className="img" alt="logo" />
+                        <nav className="nav-links">
+                <Link to="/" className="nav-link">Home</Link>
+                            <hr className="divider" />   
+                <Link to="/about" className="nav-link">About</Link>
+                            <hr className="divider" /> 
+            </nav>  
+           <img src={img} className="img" alt="logo" />
             <div className="project-intro">
                 <p>
                    नेपाली नम्बर प्लेट चिन्न र पढ्न तयार गरिएको स्वचालित प्रणाली।<br />
@@ -16,9 +22,7 @@ export default function Header() {
                 </p>  
             </div>
 
-            {/* <hr className="divider" /> */}
-            <div className="footer">
-                
+            <div className="footer"> 
                 <div className="copyright">© 2024 NLPR System (Team 200_OK)</div>
                 <div className="institution">Nepal College of Information Technology</div>
             </div>

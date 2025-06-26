@@ -1,5 +1,5 @@
 from model import train_model
-
+from config import ModelConfiguration
 
 import os
 from tqdm import tqdm

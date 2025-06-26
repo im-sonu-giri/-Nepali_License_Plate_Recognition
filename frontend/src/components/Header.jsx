@@ -8,7 +8,7 @@ export default function Header() {
             <div className="logo">Nepali License Plate Recognition</div>
             <div className="subtitle">सवारी साधन नम्बर प्लेट पहिचान प्रणाली</div>
             <hr className="divider" />
-                        <nav className="nav-links">
+             <nav className="nav-links">
                 <Link to="/" className="nav-link">Home</Link>
                             <hr className="divider" />   
                 <Link to="/about" className="nav-link">About</Link>

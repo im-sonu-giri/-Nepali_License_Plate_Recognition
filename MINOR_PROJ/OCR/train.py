@@ -1,6 +1,3 @@
-from model import train_model
-from config import ModelConfiguration
-
 import os
 from tqdm import tqdm
 import tensorflow as tf
@@ -10,11 +7,16 @@ try:
 except:
     pass
 
+from model import train_model
+from config import ModelConfiguration
+
+configs = ModelConfiguration()
+
 from keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau, TensorBoard
 
 from mltu.preprocessor import ImageReader
 
-dataset_path = "Datasets/images"
+data_path = "Datasets/images"
 validation_annotation_path = data_path + "/annotation_val.txt"
 train_annotation_path = data_path + "/annotation_train.txt"
 

@@ -11,7 +11,6 @@ function App() {
     <div className="app">
       <Header />
       <main style={{ marginLeft: '330px', padding: '18px', width: '110%' }}>
-        <ImageUpload />
         <Routes>
           <Route path="/" element={<ImageUpload />} />
           <Route path="/result" element={<ResultPage />} />

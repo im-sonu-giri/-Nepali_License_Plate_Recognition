@@ -83,9 +83,10 @@ which largely overlooks non-English scripts and are not optimized for Nepal., ma
           <h2>Key Features</h2>
           <div className="features-grid">
             <div className="feature-card">
-              <div className="feature-icon">🚗</div>
+              
               <h3>Vehicle Detection</h3>
-              <p>Accurately identifies vehicles in images or video streams</p>
+              <p>Identifies vehicles in images 
+                and process it for recognizing license plate</p>
             </div>
             <div className="feature-card">
               <div className="feature-icon">🔍</div>

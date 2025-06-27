@@ -1,7 +1,7 @@
 import './AboutPage.css';
 import teamPhoto from '../assets/team-photo.jpg';
 import systemDiagram from '../assets/system-diagram.png';
-import nepaliPlateExample from '../assets/nepali-plate-example.jpg';
+import nepaliPlateExample from '../assets/nepali-plate.png';
 
 export default function AboutPage() {
   return (

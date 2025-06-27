@@ -95,11 +95,24 @@ export default function ImageUpload() {
 
   return (
     <div className="upload-container">
-      <h2 className="upload-title">
-        Nepali License Plate Recognition 
-        <br />
-        <span className="nepali-text">(नेपाली नम्बर प्लेट पहिचान प्रणाली)</span>
-      </h2>
+<div className="upload-header">
+  <h2 className="upload-title">
+    Nepali License Plate Recognition
+    <br />
+    <span className="nepali-text">(नेपाली नम्बर प्लेट पहिचान प्रणाली)</span>
+  </h2>
+  <button 
+    onClick={() => {
+      document.querySelector('.about-container').scrollIntoView({ behavior: 'smooth' });
+    }}
+    className="about-link-btn right"
+  >
+    Learn More About Our System
+    <br />
+    <span className="nepali-text">हाम्रो प्रणालीको बारेमा थप जान्नुहोस्</span>
+  </button>
+</div>
+
 
       <p className="upload-description">
         Upload an image of a vehicle to recognize the Nepali license plate.
@@ -199,16 +212,7 @@ export default function ImageUpload() {
           </button>
         </div>
       )}
-      <button 
-  onClick={() => {
-    document.querySelector('.about-container').scrollIntoView({ behavior: 'smooth' });
-  }}
-  className="about-link-btn"
->
-  Learn More About Our System
-  <br />
-  <span className="nepali-text">हाम्रो प्रणालीको बारेमा थप जान्नुहोस्</span>
-</button>
+
     </div>
   );
 }

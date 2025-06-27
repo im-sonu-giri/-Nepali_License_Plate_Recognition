@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="app">
       <Header />
-      <main style={{ marginLeft: '310px', padding: '18px', width: '110%' }}>
+      <main style={{ marginLeft: '310px', padding: '18px', width: '100%' }}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/result" element={<ResultPage />} />

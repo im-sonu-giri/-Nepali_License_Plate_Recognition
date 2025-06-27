@@ -7,3 +7,25 @@ output_dir="cropped_plates"
 os.makedirs(output_dir,exist_ok=True)
 
 for filename in os.listdir(input_dir):
+    if filename.lower().endswith((".jpg",".png",".jpeg")):
+        image_path=os.path.join(input_dir,filename)
+        image=cv2.imread(image_path)
+
+        if image is None:
+            print(f"image cannot be read:{filename}")
+            continue
+
+        results=model(image)
+        boxes=results[0].boxes
+
+        if not boxes or len(boxes)==0:
+            print(f"No license plate detected in :{filename}")
+            continue
+
+        for i, box in enumerate(boxes.xyxy):
+            x1,y1,x2,y2 =map(int,box[:4])
+            cropped=image[y1:y2,x1:x2]
+
+
+
+

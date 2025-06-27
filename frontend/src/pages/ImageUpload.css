@@ -9,22 +9,22 @@
 }
 
 .upload-title {
-  font-size: 3.8rem;
+  font-size: 3.5rem;
   color: #11082b;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.9rem;
 }
 
 .nepali-text {
-  font-size: 0.7em;
+  font-size: 0.5em;
   color: #4c456d;
   display: block;
   margin-top: 9px;
 }
 
 .upload-description {
-  font-size: 1.25rem;
+  font-size: 1.75rem;
   color: #4a5568;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2.7rem;
 }
 
 .dropzone {

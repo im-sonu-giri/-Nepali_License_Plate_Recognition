@@ -1,0 +1,10 @@
+.scrollable-container {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+}
+
+.scrollable-container > * {
+  scroll-snap-align: start;
+  min-height: 100vh;
+}

@@ -199,6 +199,16 @@ export default function ImageUpload() {
           </button>
         </div>
       )}
+      <button 
+  onClick={() => {
+    document.querySelector('.about-container').scrollIntoView({ behavior: 'smooth' });
+  }}
+  className="about-link-btn"
+>
+  Learn More About Our System
+  <br />
+  <span className="nepali-text">हाम्रो प्रणालीको बारेमा थप जान्नुहोस्</span>
+</button>
     </div>
   );
 }

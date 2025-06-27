@@ -1,10 +1,13 @@
 .scrollable-container {
-  height: 1000vh;
   overflow-y: auto;
   scroll-snap-type: y mandatory;
+
+  /* remove this large height! */
+  height: auto; /* or just remove this line entirely */
 }
 
 .scrollable-container > * {
   scroll-snap-align: start;
   min-height: 83.9vh;
+  overflow: hidden; /* ensures no content leaks beyond */
 }

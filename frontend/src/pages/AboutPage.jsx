@@ -28,7 +28,7 @@ which largely overlooks non-English scripts and are not optimized for Nepal., ma
           </div>
           <div className="image-content">
             <img src={nepaliPlateExample} alt="Example of Nepali license plate" />
-            <p className="image-caption">Example of Nepali license plate in Devanagari script</p>
+            <p className="image-caption">Example of license plate</p>
           </div>
         </section>
 

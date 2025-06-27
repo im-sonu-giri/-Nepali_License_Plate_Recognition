@@ -89,19 +89,16 @@ which largely overlooks non-English scripts and are not optimized for Nepal., ma
                 and process it for recognizing license plate</p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">🔍</div>
               <h3>Plate Localization</h3>
-              <p>Precisely locates license plate regions within vehicle images</p>
+              <p>Locates license plate regions within vehicle images</p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">✍️</div>
               <h3>Devanagari OCR</h3>
               <p>Specialized recognition for Nepali script characters</p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">⚡</div>
-              <h3>Real-time Processing</h3>
-              <p>Optimized for quick analysis suitable for live applications</p>
+              <h3>Recognition+Processing</h3>
+              <p>Optimized for quick analysis suitable image applications</p>
             </div>
           </div>
         </section>

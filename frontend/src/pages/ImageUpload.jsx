@@ -101,16 +101,7 @@ export default function ImageUpload() {
     <br />
     <span className="nepali-text">(नेपाली नम्बर प्लेट पहिचान प्रणाली)</span>
   </h2>
-  <button 
-    onClick={() => {
-      document.querySelector('.about-container').scrollIntoView({ behavior: 'smooth' });
-    }}
-    className="about-link-btn right"
-  >
-    Learn More About Our System
-    <br />
-    <span className="nepali-text">हाम्रो प्रणालीको बारेमा थप जान्नुहोस्</span>
-  </button>
+
 </div>
 
 

@@ -1,5 +1,5 @@
 .scrollable-container {
-  height: 100vh;
+  height: 1000vh;
   overflow-y: auto;
   scroll-snap-type: y mandatory;
 }

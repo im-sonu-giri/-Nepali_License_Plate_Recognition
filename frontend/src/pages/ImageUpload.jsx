@@ -96,7 +96,7 @@ export default function ImageUpload() {
   return (
     <div className="upload-container">
       <h2 className="upload-title">
-        Nepali License Plate Recognition
+        Nepali License Plate Recognition 
         <br />
         <span className="nepali-text">नेपाली गाडी नम्बर प्लेट पहिचान</span>
       </h2>

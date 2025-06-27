@@ -55,12 +55,12 @@
 .upload-text {
   color: #4a5568;
   margin-bottom: 0.5rem;
-  font-size: 1rem;
+  font-size: 1.25rem;
 }
 
 .upload-hint {
   color: #718096;
-  font-size: 0.875rem;
+  font-size: 1.0999rem;
 }
 
 .result-image {

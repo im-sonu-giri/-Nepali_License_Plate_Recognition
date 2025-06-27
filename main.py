@@ -25,6 +25,13 @@ for filename in os.listdir(input_dir):
         for i, box in enumerate(boxes.xyxy):
             x1,y1,x2,y2 =map(int,box[:4])
             cropped=image[y1:y2,x1:x2]
+            cropped_name=f"{os.path.splitext(filename)[0]}_plate{i}.jpg"
+            output_path=os.path.join(output_dir,cropped_name)
+            cv2.imwrite(output_path,cropped)
+            print(f"saved {output_path}")
+
+        print(f"✅ Done processing: {filename}")
+
 
 
 

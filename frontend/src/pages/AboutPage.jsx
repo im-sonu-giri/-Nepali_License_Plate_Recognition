@@ -16,13 +16,13 @@ export default function AboutPage() {
           <div className="text-content">
             <h2>Project Overview</h2>
             <p>
-              Our Automatic Nepali License Plate Recognition (NLPR) system is specifically designed to recognize 
+              Automatic Nepali License Plate Recognition (NLPR) system is specifically designed to recognize 
               Nepali license plates written in Devanagari script. Unlike existing systems that primarily work with 
               Latin characters, our solution addresses the unique challenges of Nepali script recognition.
             </p>
             <p>
-              Using state-of-the-art deep learning models, we achieve high accuracy in detecting and reading 
-              license plates under various conditions, making it suitable for real-world applications in traffic 
+              Our system aims to address the gap in existing recognition systems
+which largely overlooks non-English scripts and are not optimized for Nepal., making it suitable for real-world applications in traffic 
               management, parking systems, and law enforcement.
             </p>
           </div>

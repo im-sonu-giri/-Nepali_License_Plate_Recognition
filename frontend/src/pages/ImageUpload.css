@@ -20,7 +20,7 @@
 }
 
 .upload-title {
-  font-size: 3.5rem;
+  font-size: 3.9rem;
   color: #11082b;
   margin: 0;
 }
@@ -32,7 +32,7 @@
 }
 
 .upload-description {
-  font-size: 1.75rem;
+  font-size: 1.88rem;
   color: #4a5568;
   margin-bottom: 2.5rem;
 }
@@ -40,11 +40,11 @@
 .dropzone {
   border: 2px dashed #cbd5e1;
   border-radius: 0.5rem;
-  padding: 3rem 2rem;
+  padding: 3.6rem 21rem;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s;
-  height: 30%;
+  height: 50%;
 }
 
 .dropzone:hover {

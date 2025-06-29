@@ -13,11 +13,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
+#load yolo model
 model=YOLO(r"run_gpu/weights/best.pt")
-input_dir="myimages"
+
+#input_dir="myimages"
 output_dir="cropped_plates"
 os.makedirs(output_dir,exist_ok=True)
+
+#routes
+@app.get("/")
+def root():
+    return{"message": "YOLO plate detection API is running"}
+
+
 
 
 

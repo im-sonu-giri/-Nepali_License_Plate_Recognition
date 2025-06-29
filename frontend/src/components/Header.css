@@ -1,0 +1,92 @@
+.header {
+    width: 270px;
+    height: 100vh;
+    background-color: #11082b;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    color: #f0f0f0;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 19px;
+    color: #ffffff;
+    margin-top: 15px;
+}
+
+.img{
+    margin-bottom: 19px;
+    border-radius: 9px;
+}
+
+.divider {
+  border: none;
+  height: 0.1px;
+  background-color: #53545a;
+  margin: 1px 0; 
+  margin-bottom: 2px;
+}
+
+.project-intro {
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: center;
+  max-width: 500px;
+  padding: 10px 15px;
+  color: #dae2ab;
+}
+
+.subtitle {
+    font-size: 17.9px;
+    color: #cccccc;
+    margin-bottom: 26px;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 38px;
+}
+
+.nav-link {
+    color: #cccccc;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ffffff;
+    background-color: rgba(100, 108, 255, 0.1);
+}
+
+.nav-link.active {
+    color: #646cff;
+    background-color: rgba(100, 108, 255, 0.2);
+    font-weight: 500;
+}
+
+.footer {
+
+    padding-top: 10px;
+    border-top: 1px solid #333;
+    font-size: 16px;
+    color: #999;
+    align-items: center;
+}
+
+.copyright {
+    margin-top: 0px;
+}
+
+.institution {
+    font-style: italic;
+}

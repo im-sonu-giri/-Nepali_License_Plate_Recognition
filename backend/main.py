@@ -1,10 +1,25 @@
 import os
 import cv2
 from ultralytics import YOLO
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins =["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 model=YOLO(r"run_gpu/weights/best.pt")
 input_dir="myimages"
 output_dir="cropped_plates"
 os.makedirs(output_dir,exist_ok=True)
+
+
 
 for filename in os.listdir(input_dir):
     if filename.lower().endswith((".jpg",".png",".jpeg")):

@@ -3,6 +3,8 @@ import cv2
 from ultralytics import YOLO
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi import UploadFile, File, HTTPException
+
 
 app = FastAPI()
 
@@ -25,14 +27,19 @@ os.makedirs(output_dir,exist_ok=True)
 def root():
     return{"message": "YOLO plate detection API is running"}
 
+@app.post("/detect")
+async def detect_plate(file: UploadFile = File(...)):
+    contents = await file.read()
+    nparr = np.frombuffer(contents, np.uint8)
+    image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
 
 
 
-for filename in os.listdir(input_dir):
-    if filename.lower().endswith((".jpg",".png",".jpeg")):
-        image_path=os.path.join(input_dir,filename)
-        image=cv2.imread(image_path)
+#for filename in os.listdir(input_dir):
+    #if filename.lower().endswith((".jpg",".png",".jpeg")):
+        #image_path=os.path.join(input_dir,filename)
+        #image=cv2.imread(image_path)
 
         if image is None:
             print(f"image cannot be read:{filename}")
@@ -53,7 +60,7 @@ for filename in os.listdir(input_dir):
             cv2.imwrite(output_path,cropped)
             print(f"saved {output_path}")
 
-        print(f"✅ Done processing: {filename}")
+        print(f"Done processing: {filename}")
 
 
 

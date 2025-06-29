@@ -42,8 +42,8 @@ async def detect_plate(file: UploadFile = File(...)):
         #image=cv2.imread(image_path)
 
         if image is None:
-            print(f"image cannot be read:{filename}")
-            continue
+            raise HTTPException(status_code=400, details="Invalid image file")
+            
 
         results=model(image)
         boxes=results[0].boxes

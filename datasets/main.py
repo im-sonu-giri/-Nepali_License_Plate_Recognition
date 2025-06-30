@@ -53,7 +53,7 @@ def clean_dataset(max_images=600):
         label_path = os.path.join(LABEL_DIR, label_filename)
 
         with open(label_path, 'w', encoding='utf-8') as f:
-            f.write("नं-plate")  # Replace with actual label when available
+            f.write("")  # Replace with actual label when available
 
         selected += 1
         if selected >= max_images:

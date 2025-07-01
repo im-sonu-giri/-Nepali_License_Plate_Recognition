@@ -29,5 +29,6 @@ export default function UploadPlate()
             setResult(response.data);
         }
         
+
     }
 }

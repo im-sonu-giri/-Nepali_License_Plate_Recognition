@@ -11,6 +11,7 @@ export default function UploadPlate()
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
+    
 
         if (!file) {
             alert("please select an image file");
@@ -28,7 +29,36 @@ export default function UploadPlate()
             });
             setResult(response.data);
         }
-        
+        catch(error) {
+            console.error("error uploading image:", error);
+            setResult({message: "failed to detect license plate"});
+        }
 
-    }
+
+    };
+
+    return(
+        <div style = {{ textAlign: "center"}}>
+        <h2>Upload an image of a vehicle to recognize the Nepali license plate.</h2>
+        
+        <form onSubmit={handleSubmit}> 
+            <input type="file" accept="image/*" onChange={handleFileChange} />
+            <button type="submit" disabled={!file}>Recognize License Plate</button>
+        </form>
+
+        {result && (
+            <div style={{marginTop: "20px" }}>
+            <h3>{result.message}</h3>
+             {result.count !== undefined && <p>Detected plates count: {result.count}</p>}
+            {result.detections && result.detections.map((det, index) => (
+                 <div key={index}>
+
+                    <p> Plate {index + 1}: {det.text}</p>
+                </div>
+                ))}
+        </div>
+            )}
+    </div>
+        
+    );
 }

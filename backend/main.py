@@ -18,7 +18,7 @@ app.add_middleware(
 )
 
 #load yolo model
-model=YOLO(r"run_gpu/weights/best.pt")
+model=YOLO(r"backend/run_gpu/weights/best.pt")
 
 #input_dir="myimages"
 output_dir="cropped_plates"
@@ -34,23 +34,14 @@ async def detect_plate(file: UploadFile = File(...)):
     contents = await file.read()
     nparr = np.frombuffer(contents, np.uint8)
     image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-
-
-
-
-#for filename in os.listdir(input_dir):
-    #if filename.lower().endswith((".jpg",".png",".jpeg")):
-        #image_path=os.path.join(input_dir,filename)
-        #image=cv2.imread(image_path)
-
-     if image is None:
-        raise HTTPException(status_code=400, details="Invalid image file")
+    if image is None:
+         raise HTTPException(status_code=400, detail="Invalid image file")
 
 
     results=model(image)
-    boxes=results[0].boxes
+    boxes = results[0].boxes
 
-    if  boxes is None or len(boxes.xyxy)==0:
+    if boxes is None or len(boxes.xyxy)==0:
         return{"message":"no license plate detected", "detections": []}
     detections = []
 

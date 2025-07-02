@@ -7,8 +7,8 @@ export default function ResultPage() {
   const navigate =  useNavigate();
   const { previewImage, imageName, resultText } = location.state || {};
 
-  const handleBack = () =>{
-    navigate('/upload')
+  const handleBack = () => {
+    navigate('/upload');
   }
   return (
     <div className="result-container">
@@ -17,12 +17,16 @@ export default function ResultPage() {
       <div className="result-content">
         <div className="image-section">
           <h3>Uploaded Image</h3>
+          {previewImage ? (
           <img 
             src={previewImage} 
             alt="Uploaded plate" 
             className="result-image"
           />
-          <p className="image-name">{imageName}</p>
+        ):(
+          <p>No image available</p>
+        )}
+        {imageName && <p className="image-name">{imageName}</p>}
         </div>
 
         <div className="text-section">
@@ -30,12 +34,11 @@ export default function ResultPage() {
           <div className="recognized-text">
             {resultText || "ब १ पा ३४५६"} {/* Default demo text if none provided */}
           </div>
-          <div className="confidence">
-            <span>Confidence: 92%</span>
-          </div>
         </div>
       </div>
-
+      <button onClick={handleBack} style={{ marginTop: '20px' }}>
+        Back to Upload
+      </button>
       <div className="additional-info">
         <h3>How It Works</h3>
         <p>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function UploadPlate()
 {
@@ -22,9 +23,14 @@ export default function UploadPlate()
 
         try {
             const res =await axios.post("http://localhost:8000/detect", formData);
-            setResult(res.data);
-        }
-        catch(error)
+            const { text, cropped_image } = res.data;
+            navigate("/result", {
+                state: {
+                  resultText: text,
+                  previewImage: `data:image/jpeg;base64,${cropped_image}`,
+                },
+        });
+    }catch(error)
         {
             console.error("Error:", error);
             alert("Error uploading image");
@@ -38,22 +44,7 @@ export default function UploadPlate()
             <button type="submit" disabled={!file} style={{ marginLeft: "1rem" }}>
               Detect
             </button>
-        </form>
-
-        {result && (
-            <div style={{ marginTop: "2rem" }}>
-                <h3>{result.message}</h3>
-          <p>Detected Text: <strong>{result.text}</strong></p>
-          <img
-            src={`data:image/jpeg;base64,${result.cropped_image}`}
-            alt="Cropped Plate"
-            style={{ width: "300px", border: "2px solid #000" }}
-          />
+          </form>
         </div>
-      )}
-    </div>
-  );
-}
-
-
+    );
 }

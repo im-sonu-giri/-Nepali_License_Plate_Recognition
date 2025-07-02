@@ -30,7 +30,14 @@ export default function UploadPlate()
             alert("Error uploading image");
         }
     };
+    return (
+        <div style={{ padding: "2rem" }}>
+          <h2>Upload Image for License Plate Detection</h2>
+          <form onSubmit={handleSubmit}>
+            <input type="file" accept="image/*" onChange={handleFileChange} />
+            <button type="submit" disabled={!file} style={{ marginLeft: "1rem" }}>
+              Detect
+            </button>
 
-    
 
 }

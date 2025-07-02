@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function UploadPlate()
 {
     const [file , setFile ]= useState(null);
-    const [result, setResult] = useState(null);
+    const navigate = useNavigate();
     
     const handleFileChange = (e) =>{
         setFile(e.target.files[0]);
@@ -29,8 +29,9 @@ export default function UploadPlate()
                   resultText: text,
                   previewImage: `data:image/jpeg;base64,${cropped_image}`,
                 },
-        });
-    }catch(error)
+            });
+        }
+        catch(error)
         {
             console.error("Error:", error);
             alert("Error uploading image");

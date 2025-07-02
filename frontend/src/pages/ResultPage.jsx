@@ -1,10 +1,15 @@
-import { useLocation } from 'react-router-dom';
+import React from 'react';
+import { useLocation, useNavigate} from 'react-router-dom';
 import './ResultPage.css';
 
 export default function ResultPage() {
   const location = useLocation();
+  const navigate =  useNavigate();
   const { previewImage, imageName, resultText } = location.state || {};
 
+  const handleBack = () =>{
+    navigate('/upload')
+  }
   return (
     <div className="result-container">
       <h2 className="result-title">Recognition Results</h2>

@@ -17,5 +17,7 @@ export default function UploadPlate()
             alert("please select an image");
             return;
         }
+        const formData = new FormData();
+        formData.append("file", file);
     }
 }

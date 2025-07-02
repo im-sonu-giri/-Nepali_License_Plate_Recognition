@@ -38,6 +38,22 @@ export default function UploadPlate()
             <button type="submit" disabled={!file} style={{ marginLeft: "1rem" }}>
               Detect
             </button>
+        </form>
+
+        {result && (
+            <div style={{ marginTop: "2rem" }}>
+                <h3>{result.message}</h3>
+          <p>Detected Text: <strong>{result.text}</strong></p>
+          <img
+            src={`data:image/jpeg;base64,${result.cropped_image}`}
+            alt="Cropped Plate"
+            style={{ width: "300px", border: "2px solid #000" }}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
 
 
 }

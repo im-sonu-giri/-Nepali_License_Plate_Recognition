@@ -4,6 +4,7 @@ import ImageUpload from './pages/ImageUpload.jsx'
 import ResultPage from './pages/ResultPage.jsx'
 import AboutPage from './pages/AboutPage.jsx'
 import HomePage from './pages/HomePage.jsx'
+import UploadPlate from './components/UploadPlate'
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
 
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/result" element={<ResultPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/upload" element={<UploadPlate />} />
         </Routes> 
       </main>
     </div>

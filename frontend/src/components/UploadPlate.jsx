@@ -19,5 +19,18 @@ export default function UploadPlate()
         }
         const formData = new FormData();
         formData.append("file", file);
-    }
+
+        try {
+            const res =await axios.post("http://localhost:8000/detect", formData);
+            setResult(res.data);
+        }
+        catch(error)
+        {
+            console.error("Error:", error);
+            alert("Error uploading image");
+        }
+    };
+
+    
+
 }

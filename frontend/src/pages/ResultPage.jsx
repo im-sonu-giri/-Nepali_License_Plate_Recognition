@@ -12,9 +12,12 @@ export default function ResultPage() {
     }
   },
   [previewImage, resultText, navigate]);
+  if (!previewImage || !resultText){
+    return null;
+  }
 
   const handleBack = () => {
-    navigate("/upload");
+    navigate("/imageupload");
   };
 
   return (

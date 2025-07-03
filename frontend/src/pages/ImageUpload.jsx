@@ -77,13 +77,12 @@ export default function ImageUpload() {
     setIsLoading(true);
     setError(null);
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      navigate('/result', {
-        state: {
-          previewImage: preview,
-          imageName: document.getElementById('file-input').files[0]?.name || 'uploaded-image.jpg',
-          resultText: "ब १ पा ३४५६"
-        }
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const response = await fetch('http://127.0.0.1:8000/detect', {
+        method: 'POST',
+        body: formData,
       });
     } catch (err) {
       setError('An error occurred during processing. Please try again.\nप्रोसेस गर्दा त्रुटि भयो। कृपया फेरि प्रयास गर्नुहोस्।');

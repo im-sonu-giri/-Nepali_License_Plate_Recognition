@@ -23,7 +23,7 @@ export default function Header() {
             </div>
 
             <div className="footer"> 
-                <div className="copyright">© 2024 NLPR System (Team 200_OK)</div>
+                <div className="copyright">© 2025 NLPR System (Team 200_OK)</div>
                 <div className="institution">Nepal College of Information Technology</div>
             </div>
         </header>

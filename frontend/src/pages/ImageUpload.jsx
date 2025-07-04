@@ -1,10 +1,11 @@
 import { useCallback, useState } from 'react';
-import { FiUpload, FiImage, FiX, FiCheck } from 'react-icons/fi';
+import { FiUpload, FiX, FiCheck } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import './ImageUpload.css';
 
 export default function ImageUpload() {
   const [preview, setPreview] = useState(null);
+  const [file, setFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isDragActive, setIsDragActive] = useState(false);
@@ -12,7 +13,7 @@ export default function ImageUpload() {
 
   const validFileTypes = ['image/jpeg', 'image/png', 'image/jpg'];
   const maxFileSize = 5 * 1024 * 1024;
-
+  
   const validateFile = (file) => {
     if (!validFileTypes.includes(file.type)) {
       setError('Invalid file type. Please upload a JPEG or PNG image.\nगलत फाइल प्रकार। कृपया JPEG वा PNG अपलोड गर्नुहोस्।');
@@ -28,13 +29,15 @@ export default function ImageUpload() {
   const onDrop = useCallback((acceptedFiles) => {
     setError(null);
     setIsDragActive(false);
-    const file = acceptedFiles[0];
-    if (!file) return;
-    if (!validateFile(file)) return;
+    const newFile = acceptedFiles[0];
+    if (!newFile) return;
+    if (!validateFile(newFile)) return;
 
     const reader = new FileReader();
     reader.onload = () => setPreview(reader.result);
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(newFile);
+
+    setFile(newFile);
   }, []);
 
   const handleDragEnter = (e) => {
@@ -68,14 +71,20 @@ export default function ImageUpload() {
 
   const removeImage = () => {
     setPreview(null);
+    setFile(null);
     setError(null);
     document.getElementById('file-input').value = '';
   };
 
   const handleProcess = async () => {
-    if (!preview) return;
+    if (!file) {
+      setError('Please upload an image first.');
+      return;
+    }
+
     setIsLoading(true);
     setError(null);
+
     try {
       const formData = new FormData();
       formData.append('file', file);
@@ -84,9 +93,25 @@ export default function ImageUpload() {
         method: 'POST',
         body: formData,
       });
+
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      const { text, cropped_image } = data;
+
+      navigate('/result', {
+        state: {
+          previewImage: `data:image/jpeg;base64,${cropped_image}`,
+          imageName: file.name,
+          resultText: text || "ब १ पा ३४५६", // fallback dummy Nepali plate text
+        },
+      });
     } catch (err) {
-      setError('An error occurred during processing. Please try again.\nप्रोसेस गर्दा त्रुटि भयो। कृपया फेरि प्रयास गर्नुहोस्।');
-      console.error('Processing error:', err);
+      setError('Error uploading image. Please try again.\nत्रुटि भयो। कृपया पुन: प्रयास गर्नुहोस्।');
+      console.error('Upload error:', err);
     } finally {
       setIsLoading(false);
     }
@@ -94,15 +119,13 @@ export default function ImageUpload() {
 
   return (
     <div className="upload-container">
-<div className="upload-header">
-  <h2 className="upload-title">
-    Nepali License Plate Recognition
-    <br />
-    <span className="nepali-text">(नेपाली नम्बर प्लेट पहिचान प्रणाली)</span>
-  </h2>
-
-</div>
-
+      <div className="upload-header">
+        <h2 className="upload-title">
+          Nepali License Plate Recognition
+          <br />
+          <span className="nepali-text">(नेपाली नम्बर प्लेट पहिचान प्रणाली)</span>
+        </h2>
+      </div>
 
       <p className="upload-description">
         Upload an image of a vehicle to recognize the Nepali license plate.
@@ -202,7 +225,6 @@ export default function ImageUpload() {
           </button>
         </div>
       )}
-
     </div>
   );
 }

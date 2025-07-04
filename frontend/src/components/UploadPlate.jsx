@@ -9,7 +9,7 @@ export default function UploadPlate() {
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
-
+    //send imagefile to backend
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -37,15 +37,12 @@ export default function UploadPlate() {
     } 
     catch (error) {
         if (error.response) {
-          // Server responded with a status code outside 2xx
           console.error("Response error data:", error.response.data);
           console.error("Response error status:", error.response.status);
           console.error("Response error headers:", error.response.headers);
         } else if (error.request) {
-          // Request was made but no response received
           console.error("No response received:", error.request);
         } else {
-          // Something else happened setting up the request
           console.error("Error setting up request:", error.message);
         }
         alert("Error uploading image. Check console for details.");

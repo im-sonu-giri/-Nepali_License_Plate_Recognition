@@ -1,23 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function ResultPage() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { previewImage, resultText } = location.state || {};
+  const previewImage = location?.state?.previewImage;
+  const resultText = location?.state?.resultText;
+
   useEffect(() => {
     if (!previewImage || !resultText) {
-      navigate("/imageupload");
+      navigate("/upload");
     }
-  },
-  [previewImage, resultText, navigate]);
-  if (!previewImage || !resultText){
-    return null;
-  }
+  }, [previewImage, resultText, navigate]);
+
+  if (!previewImage || !resultText) return null;
 
   const handleBack = () => {
-    navigate("/imageupload");
+    navigate("/upload");
   };
 
   return (

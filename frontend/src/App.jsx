@@ -15,7 +15,7 @@ function App() {
       <main style={{ marginLeft: '310px', padding: '18px', width: '100%' }}>
         <Routes>
         <Route path="/" element={<Navigate to="/upload" replace />} />
-          <Route path="/upload" element={<UploadPlate />} />
+          <Route path="/upload" element={<ImageUpload />} />
           <Route path="/result" element={<ResultPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/home" element={<HomePage />} />

@@ -18,10 +18,12 @@ except:
     pass
 
 from model_train.ctc_loss import CTCloss
+from inferencemodel import demo_random_val_sample
 from model_train.grayscalereader import GrayscaleImageReader
 from model_train.model import train_model
 from metrics.conf_matrix import ConfMatrixCallback
 from metrics.char_prf1 import CharPRF1
+from model_train.data_utils import decode_predictions, visualize_predictions
 
 
 from model_train.np_image_resizer import NumpyImageResizer
@@ -33,6 +35,14 @@ from mltu.tensorflow.callbacks import Model2onnx, TrainLogger
 
 from configs.config import ModelConfiguration
 
+import matplotlib
+matplotlib.rcParams['font.family'] = 'Lohit Devanagari'
+
+class DebugCallback(tf.keras.callbacks.Callback):
+    def on_epoch_end(self, epoch, logs=None):
+        print(f"Epoch {epoch} | Loss: {logs.get('loss')} | Val Loss: {logs.get('val_loss')}")
+        if np.isnan(logs.get('loss')):
+            print("Warning: Loss is NaN!")
 
 # Clean labels 
 def clean_labels(data_path):
@@ -89,6 +99,14 @@ def labels_to_texts(labels_batch, vocab):
         texts.append(text)
     return texts
 
+def check_for_nans_and_infs(dataset):
+    for img_path, _ in dataset:
+        img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE).astype("float32") / 255.
+        if np.isnan(img).any() or np.isinf(img).any():
+            raise ValueError(f"NaN/Inf found in {img_path}")
+
+
+
 def main():
     config = ModelConfiguration()
 
@@ -117,6 +135,10 @@ def main():
     config.max_text_length = max(max_train_len, max_val_len)
     config.save()
 
+    check_for_nans_and_infs(train_dataset)
+    check_for_nans_and_infs(val_dataset)
+
+
     # Create data provider for model training
     train_data_provider = DataProvider(
         dataset=train_dataset,
@@ -127,7 +149,7 @@ def main():
         transformers=[
             NumpyImageResizer(config.width, config.height),
             LabelIndexer(config.vocab),
-            LabelPadding(max_word_length=config.max_text_length, padding_value=len(config.vocab) - 1)
+            LabelPadding(max_word_length=config.max_text_length, padding_value=len(config.vocab))
         ]
     )
 
@@ -140,9 +162,17 @@ def main():
         transformers=[
             NumpyImageResizer(config.width, config.height),
             LabelIndexer(config.vocab),
-            LabelPadding(max_word_length=config.max_text_length, padding_value=len(config.vocab) - 1)
+            LabelPadding(max_word_length=config.max_text_length, padding_value=len(config.vocab))
         ]
     )
+
+    for i, (batch_x, batch_y) in enumerate(train_data_provider):
+        if i >= 10:
+            break
+        if tf.math.reduce_any(tf.math.is_nan(batch_x)) or tf.math.reduce_any(tf.math.is_inf(batch_x)):
+            raise ValueError("NaN or Inf detected in input images.")
+
+
 
     # Model Initialization
     model = train_model(
@@ -152,7 +182,7 @@ def main():
 
     # Compile model
     model.compile(
-        optimizer=tf.keras.optimizers.Adam(learning_rate=config.learning_rate),
+        optimizer = tf.keras.optimizers.Adam(learning_rate=config.learning_rate, clipnorm=1.0),
         loss=CTCloss(blank_index=len(config.vocab)),
         metrics=[
             CWERMetric(padding_token=-1),
@@ -174,14 +204,24 @@ def main():
     # Prepare output directory
     os.makedirs(config.model_path, exist_ok=True)
 
+    conf_matrix_cb = ConfMatrixCallback(
+    val_data=val_data_provider,
+    charset=config.vocab,
+    pad=len(config.vocab),
+    log_dir=f"{config.model_path}/logs"
+)
+
+
     # Define callbacks
     callbacks = [
-        EarlyStopping(monitor="val_char_f1", patience=15, mode="max"), 
-        ModelCheckpoint(f"{config.model_path}/model.h5", monitor="val_char_f1", save_best_only=True, mode="max"),
-        TrainLogger(config.model_path), TensorBoard(log_dir=f"{config.model_path}/logs", update_freq='epoch', write_graph=True), 
-        ReduceLROnPlateau(monitor="val_CER", factor=0.9, min_delta=1e-10, patience=5, verbose=1, mode="auto"), 
-        Model2onnx(f"{config.model_path}/model.h5")
-        ]
+    EarlyStopping(monitor="val_char_f1", patience=15, mode="max"), 
+    ModelCheckpoint(f"{config.model_path}/model.h5", monitor="val_char_f1", save_best_only=True, mode="max"), conf_matrix_cb,  
+    TrainLogger(config.model_path),
+    TensorBoard(log_dir=f"{config.model_path}/logs", update_freq='epoch', write_graph=True),
+    ReduceLROnPlateau(monitor="val_CER", factor=0.9, min_delta=1e-10, patience=5, verbose=1, mode="auto"), 
+    Model2onnx(f"{config.model_path}/model.h5")
+]
+
     
     # In main(), after dataset loading:
     print("\nSample Validation:")
@@ -205,26 +245,17 @@ def main():
         model.save(os.path.join(config.model_path, "interrupted_model.h5"))
         raise
 
+    
+
+
     # Save final datasets
     train_data_provider.to_csv(os.path.join(config.model_path, "train.csv"))
     val_data_provider.to_csv(os.path.join(config.model_path, "val.csv"))
 
     print("\nTraining completed successfully!")
 
-    # Any image from dataset
-    img_path = train_dataset[0][0]  
-    img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
+    demo_random_val_sample(model, val_dataset, config.vocab)
 
-    plt.imshow(img, cmap='gray')
-    plt.title(f"True Label: {train_dataset[0][1]}")
-    plt.show()
-
-    print("First 5 training labels:")
-    for i in range(5):
-        print(f"{train_dataset[i][0]} → {train_dataset[i][1]}")
-
-    results = model.evaluate(val_data_provider)
-    print("Validation results:", results)
 
     # After training or in validation loop:
     batch = next(iter(val_data_provider))
@@ -232,10 +263,22 @@ def main():
 
     predictions = model.predict(images)
     pred_texts = decode_predictions(predictions, config.vocab)
+    pred_probs = tf.nn.softmax(predictions, axis=-1)  # Get softmax probabilities
+    print(pred_probs)
 
     true_texts = labels_to_texts(labels, config.vocab)
 
     visualize_predictions(images, true_texts, pred_texts, num=5)
+
+    for path, _ in val_dataset:
+        img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
+        if img is None:
+            print(f"Missing or unreadable image: {path}")
+        elif np.isnan(img).any():
+            print(f"Image with NaNs: {path}")
+        elif np.max(img) == 0:
+            print(f"Image is completely black: {path}")
+
 
 if __name__ == "__main__":
     main()

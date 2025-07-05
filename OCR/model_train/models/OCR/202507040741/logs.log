@@ -1,2 +1,0 @@
-2025-07-04 07:42:04,836 - absl - WARNING - You are saving your model as an HDF5 file via `model.save()` or `keras.saving.save_model(model)`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save('my_model.keras')` or `keras.saving.save_model(model, 'my_model.keras')`. 
-2025-07-04 07:42:04,985 - root - INFO - Epoch 0; CER: 1.744317889213562; WER: 1.0; char_f1: 0.02488415315747261; loss: 333.4498596191406; val_CER: 1.5839627981185913; val_WER: 1.0; val_char_f1: 0.0; val_loss: 222.39210510253906

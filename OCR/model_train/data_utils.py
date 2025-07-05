@@ -2,8 +2,12 @@ import os
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+
 from albumentations import Compose, RandomBrightnessContrast, GaussianBlur, ShiftScaleRotate
 import tensorflow as tf
+
+import matplotlib
+matplotlib.rcParams['font.family'] = 'Lohit Devanagari'
 
 
 def clean_labels(data_path):
